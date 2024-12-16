@@ -18,10 +18,15 @@ function getStyles(left, top, isDragging) {
 }
 export const DraggableBox = memo(function DraggableBox(props) {
   const { fId, id, title, left, top, height, width, boxes, setBoxes } = props;
+
+  let newTop = top;
+  if (top < 0) {
+    newTop = 0;
+  }
   const [{ isDragging }, drag, preview] = useDrag(
     () => ({
       type: ItemTypes.BOX,
-      item: { id, left, top, title },
+      item: { id, left, top: newTop, title },
       collect: (monitor) => ({
         isDragging: monitor.isDragging(),
       }),

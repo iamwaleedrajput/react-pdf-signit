@@ -1,48 +1,51 @@
-@import url('https://fonts.googleapis.com/css2?family=Allura&family=Dancing+Script:wght@400..700&family=Great+Vibes&family=Handlee&family=Homemade+Apple&family=Satisfy&family=Sora:wght@100..800&family=Space+Grotesk:wght@300..700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Allura&family=Dancing+Script:wght@400..700&family=Great+Vibes&family=Handlee&family=Homemade+Apple&family=Satisfy&family=Sora:wght@100..800&family=Space+Grotesk:wght@300..700&display=swap");
+
+:root {
+  --scale-factor: 1;
+}
 
 .css-rizt0-MuiTypography-root {
-    /* font-size: 14px !important; */
-    white-space: nowrap;
-    color :rgba(0, 0, 0, 0.54) !important
+  /* font-size: 14px !important; */
+  white-space: nowrap;
+  color: rgba(0, 0, 0, 0.54) !important;
 }
 
-body{
-    background-color: #fafafa;
+body {
+  background-color: #fafafa;
 }
 
-.sigCanvas{
-    border: 1px solid black;
+.sigCanvas {
+  border: 1px solid black;
 }
-.rpv-core__inner-pages{
-    overflow-y: hidden !important;
+.rpv-core__inner-pages {
+  overflow-y: hidden !important;
 }
 
 .homemade-apple-regular {
-    font-family: "Homemade Apple", cursive;
-    font-weight: 400;
-    font-style: normal;
-  }
-  .allura-regular {
-    font-family: "Allura", cursive;
-    font-weight: 400;
-    font-style: normal;
-  }
-  .satisfy-regular {
-    font-family: "Satisfy", cursive;
-    font-weight: 400;
-    font-style: normal;
-  }
-  .great-vibes-regular {
-    font-family: "Great Vibes", cursive;
-    font-weight: 400;
-    font-style: normal;
-  }
-  .handlee-regular {
-    font-family: "Handlee", cursive;
-    font-weight: 400;
-    font-style: normal;
-  }
-
+  font-family: "Homemade Apple", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+.allura-regular {
+  font-family: "Allura", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+.satisfy-regular {
+  font-family: "Satisfy", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+.great-vibes-regular {
+  font-family: "Great Vibes", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+.handlee-regular {
+  font-family: "Handlee", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
 
 .dancing-script {
   font-family: "Dancing Script", cursive;
@@ -50,7 +53,7 @@ body{
   font-style: normal;
 }
 
-.file-picker{
+.file-picker {
   height: 200px;
   width: 300px !important;
   /* width: 300px; */
@@ -58,17 +61,69 @@ body{
   /* padding: 100px 200px ; */
 }
 
-.file-picker > label{
+.file-picker > label {
   background-color: #fafafa;
   border: 2px dashed #000;
   padding: 50px 100px;
   /* width: 300px !important; */
 }
 
-input[type='file']{
+input[type="file"] {
   display: none;
 }
 
-.text-center{
+.text-center {
   text-align: right;
+}
+
+.pdf-container {
+  max-width: 1280px;
+  margin: auto;
+}
+
+.pdf-row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.pdf-col-7 {
+  /* width: 58.3333333333%; */
+  width: 612px;
+}
+.pdf-col-3 {
+  width: 25%;
+}
+
+@media screen and (max-width: 600px) {
+  .pdf-col-7 {
+    width: 100%;
+  }
+  .pdf-col-3 {
+    width: 100%;
+  }
+}
+
+/* .rpv-core__text-layer {
+  height: 100% !important;
+}
+
+.rpv-core__canvas-layer {
+  height: 100% !important;
+}
+.rpv-core__canvas-layer,
+.rpv-core__inner-page {
+  height: 100% !important;
+} */
+
+/* .rpv-core__page-layer::after {
+  left: 0 !important;
+  right: 0 !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  box-shadow: none !important;
+  border-bottom: 1px solid gray;
+} */
+
+.rpv-core__inner-page {
+  background-color: transparent !important;
 }

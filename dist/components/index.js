@@ -75,14 +75,14 @@ function ReactPDFSignIn(_ref) {
       }
     }
   }, [signatureImage]);
-  return /*#__PURE__*/_react.default.createElement(_react.Fragment, null, /*#__PURE__*/_react.default.createElement(_material.Container, {
-    maxWidth: "xl"
-  }, /*#__PURE__*/_react.default.createElement(_material.Grid2, {
-    container: true
+  return /*#__PURE__*/_react.default.createElement(_react.Fragment, null, /*#__PURE__*/_react.default.createElement(_material.Box, null, /*#__PURE__*/_react.default.createElement(_material.Grid2, {
+    container: true,
+    maxWidth: "lg",
+    marginX: "auto"
   }, /*#__PURE__*/_react.default.createElement(_material.Grid2, {
     item: true,
     size: {
-      xl: 2,
+      xl: 3,
       lg: 3,
       md: 3
     }
@@ -101,9 +101,9 @@ function ReactPDFSignIn(_ref) {
   }))), /*#__PURE__*/_react.default.createElement(_material.Grid2, {
     item: true,
     size: {
-      xl: 8,
-      lg: 8,
-      md: 8
+      xl: 7,
+      lg: 7,
+      md: 7
     }
   }, /*#__PURE__*/_react.default.createElement(_PDFViewer.default, {
     fileUrl: fileUrl,

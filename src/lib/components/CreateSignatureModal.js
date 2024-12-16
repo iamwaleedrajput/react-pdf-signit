@@ -6,7 +6,7 @@ import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import DrawIcon from "@mui/icons-material/Draw";
 import {
   Button,
-  Grid2,
+  Grid as Grid2,
   IconButton,
   ListItem,
   ListItemButton,
@@ -276,10 +276,10 @@ export default function CreateSignatureModal({
                   <Grid2
                     key={index}
                     container
-                    spacing={2}
+                    columnSpacing={2}
                     sx={{ background: index % 2 ? "#fafafa" : "#fff" }}
                   >
-                    <Grid2 item size={8}>
+                    <Grid2 xl={8}>
                       <div style={{ display: "flex", alignItems: "center" }}>
                         <Radio
                           checked={selected === item.divRef}
@@ -287,14 +287,14 @@ export default function CreateSignatureModal({
                         />
                         <h1
                           className={item.font}
-                          style={{ padding: " 0 15px", margin: 0 }}
+                          style={{ padding: "10px 15px", margin: 0 }}
                           ref={item.divRef}
                         >
                           {values.name}
                         </h1>
                       </div>
                     </Grid2>
-                    <Grid2 item size={4}>
+                    <Grid2 item xl={4}>
                       <div style={{ display: "flex", alignItems: "center" }}>
                         <Radio
                           checked={selected === item.initialRef}
@@ -302,7 +302,7 @@ export default function CreateSignatureModal({
                         />
                         <h1
                           className={item.font}
-                          style={{ padding: " 0 15px", margin: 0 }}
+                          style={{ padding: "10px 15px", margin: 0 }}
                           ref={item.initialRef}
                         >
                           {values.inital}

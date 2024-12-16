@@ -7,10 +7,11 @@ import { ItemTypes } from "./ItemTypes";
 import { snapToGrid as doSnapToGrid } from "./snapToGrid";
 const styles = {
   width: "100%",
-  minHeight: "871.2px",
-  border: "1px solid black",
+  minHeight: "792px",
+  // border: "1px solid black",
   position: "relative",
   overflowY: "hidden",
+  // height: "100%",
 };
 export const Container = ({
   snapToGrid,
@@ -57,6 +58,7 @@ export const Container = ({
           background: "red",
           display: signatureImage ? "" : "none",
         }}
+        id="sign_container"
       >
         {boxes.map((key, index) => (
           <DraggableBox

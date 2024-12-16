@@ -16,61 +16,77 @@ export default function SubmitSignature({
   loading,
   setLoading,
 }) {
+  console.log("moved, boxes", boxes);
   const createSignatureImage = async (allPages) => {
-    console.log("all", allPages);
-    console.log("boxes", boxes);
-    const { height, width } = allPages[0].getSize();
-    let arr = [];
-    for (let i in allPages) {
-      // ** height limits
-      const fromHeigth = height * i;
-      const toHeight = width * (i + 1);
+    try {
+      const sign_container = document.getElementById("sign_container");
+      console.log("sign_container", sign_container.offsetWidth);
+      const { height, width } = allPages[0].getSize();
+      const newWidth = sign_container.offsetWidth - width;
+      const ratioWidth = newWidth / 2;
+      console.log("newWidth", newWidth);
+      let arr = [];
 
-      // ** filter boxes with given height limits
-      const filteredBoxes = boxes.filter(
-        (item) => item.top >= fromHeigth && item.top <= toHeight
-      );
+      for (let i in allPages) {
+        // ** height limits
+        const fromHeigth = height * i;
+        const toHeight = height * (i + 1);
 
-      // ** create div/element
-      const elem = document.createElement("div");
-      elem.id = "my-div";
-      elem.style.height = `${height}px`;
-      elem.style.width = `${width}px`;
-      elem.style.background = `transparent`;
-      elem.style.position = "relative ";
+        // ** filter boxes with given height limits
+        let filteredBoxes = boxes.filter(
+          (item) => item.top >= fromHeigth && item.top <= toHeight
+        );
 
-      for (let j of filteredBoxes) {
-        const top = j.top - fromHeigth;
-        const img = document.createElement("img");
-        img.src = j["title"]; // Replace with your image URL
-        img.alt = "Custom Image";
-        img.style.width = j["width"] + "px";
-        img.style.height = j["height"] + "px";
-        img.style.position = "absolute";
-        img.style.zIndex = "99";
-        img.style.top = top + "px";
-        img.style.left = j["left"] + "px";
-        elem.appendChild(img);
+        if (parseInt(i) === 0) {
+          const negativeCoor = boxes.filter((item) => item.top < 0);
+          filteredBoxes = [...filteredBoxes, ...negativeCoor];
+        }
+
+        // ** create div/element
+        const elem = document.createElement("div");
+        elem.id = "my-div";
+        elem.style.height = `${height}px`;
+        elem.style.width = `${width}px`;
+        elem.style.background = "rgba(0,255,0,0.2)";
+        // elem.style.background = `transparent`;
+        elem.style.position = "relative";
+        console.log("filteredBoxes boxes", filteredBoxes);
+        for (let j of filteredBoxes) {
+          const top = j.top - fromHeigth;
+          const img = document.createElement("img");
+          img.src = j["title"]; // Replace with your image URL
+          img.alt = "Custom Image";
+          img.style.width = j["width"] + "px";
+          img.style.height = j["height"] + "px";
+          img.style.position = "absolute";
+          img.style.zIndex = "99";
+          img.style.top = top + "px";
+          img.style.left = j["left"] - ratioWidth + "px";
+          img.style.objectFit = "cover";
+          img.style.background = "rgba(255,0,0,0.2)";
+          elem.appendChild(img);
+        }
+        document.body.appendChild(elem);
+        const divElement = document.getElementById("my-div");
+        const canvas = await html2canvas(divElement, {
+          backgroundColor: null, // Ensure transparency
+          height,
+          width,
+        });
+        const dataURL = canvas.toDataURL();
+        arr.push(dataURL);
+        document.body.removeChild(divElement);
       }
-      document.body.appendChild(elem);
-      const divElement = document.getElementById("my-div");
-      const canvas = await html2canvas(divElement, {
-        backgroundColor: null, // Ensure transparency
-      });
-      const dataURL = canvas.toDataURL();
-
-      arr.push(dataURL);
-      document.body.removeChild(divElement);
+      return arr;
+    } catch (e) {
+      console.log("e", e);
     }
-    return arr;
   };
 
   const createSignedPDF = async () => {
     setLoading && setLoading(true);
     const pdfBytes = await fetch(fileUrl).then((res) => res.arrayBuffer());
     // Convert the canvas to a Data URI
-
-    // console.log("signatureBytes", signatureBytes);
     // Load the PDF document
     const pdfDoc = await PDFDocument.load(pdfBytes);
     // Embed the signature image into the PDF document
@@ -79,19 +95,20 @@ export default function SubmitSignature({
     // Get the first page of the PDF (you can select other pages if needed)
     const pages = pdfDoc.getPages(); // You can use `getPages()[pageIndex]` for other pages
     const images = await createSignatureImage(pages);
-    console.log("images(pages)", images);
     for (let i in images) {
-      //   console.log("i data", i);
       const signatureBytes = images[i];
+
       const signatureImage = await pdfDoc.embedPng(signatureBytes);
-      pages[i].drawImage(signatureImage);
+      pages[i].drawImage(signatureImage, {
+        width: pages[i].getWidth(), // Match page width
+        height: pages[i].getHeight(), // Match page height
+      });
     }
-    // // Save the modified PDF
+    // ** Save the modified PDF
     const pdfBytesModified = await pdfDoc.save();
-    // // Optionally, you can trigger a download or do something with the modified PDF
+    // ** Optionally, you can trigger a download or do something with the modified PDF
     const blob = new Blob([pdfBytesModified], { type: "application/pdf" });
     const link = URL.createObjectURL(blob);
-    console.log("link", blob);
     fetch(link)
       .then((response) => response.blob())
       .then((blob) => {
@@ -99,7 +116,7 @@ export default function SubmitSignature({
           type: blob.type,
         });
       });
-    // window.open(link);
+    window.open(link);
   };
   return (
     <Fragment>

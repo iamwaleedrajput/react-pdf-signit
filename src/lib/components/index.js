@@ -5,6 +5,7 @@ import { PDFDocument } from "pdf-lib";
 import { pdfjs } from "react-pdf";
 import PDFViewer from "./PDFViewer";
 import {
+  Box,
   Container,
   Grid2,
   List,
@@ -57,7 +58,7 @@ export default function ReactPDFSignIn({ fileUrl, loading, setLoading }) {
             width: 150,
             height: 100,
             top: 20,
-            left: 80,
+            left: 20,
             title: signatureImage,
           },
         ]);
@@ -66,9 +67,10 @@ export default function ReactPDFSignIn({ fileUrl, loading, setLoading }) {
   }, [signatureImage]);
   return (
     <Fragment>
-      <Container maxWidth="xl">
-        <Grid2 container>
-          <Grid2 item size={{ xl: 2, lg: 3, md: 3 }}>
+      {/* <Box> */}
+      <div className="pdf-container">
+        <div className="pdf-row" container>
+          <div item className="pdf-col-3">
             <List>
               <CreateSignatureModal
                 setDragAndDrop={setDragAndDrop}
@@ -86,17 +88,19 @@ export default function ReactPDFSignIn({ fileUrl, loading, setLoading }) {
               ) : (
                 ""
               )}
-              {signatureImage && (
+              {boxes.length ? (
                 <SubmitSignature
                   fileUrl={fileUrl}
                   boxes={boxes}
                   loading={loading}
                   setLoading={setLoading}
                 />
+              ) : (
+                ""
               )}
             </List>
-          </Grid2>
-          <Grid2 item size={{ xl: 8, lg: 8, md: 8 }}>
+          </div>
+          <div item className="pdf-col-7">
             <PDFViewer
               fileUrl={fileUrl}
               signatureImage={signatureImage}
@@ -104,9 +108,10 @@ export default function ReactPDFSignIn({ fileUrl, loading, setLoading }) {
               boxes={boxes}
               setBoxes={setBoxes}
             />
-          </Grid2>
-        </Grid2>
-      </Container>
+          </div>
+        </div>
+      </div>
+      {/* </Box> */}
     </Fragment>
   );
 }
