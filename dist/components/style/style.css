@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Allura&family=Dancing+Script:wght@400..700&family=Great+Vibes&family=Handlee&family=Homemade+Apple&family=Satisfy&family=Sora:wght@100..800&family=Space+Grotesk:wght@300..700&display=swap');
+
+.css-rizt0-MuiTypography-root {
+    /* font-size: 14px !important; */
+    white-space: nowrap;
+    color :rgba(0, 0, 0, 0.54) !important
+}
+
+body{
+    background-color: #fafafa;
+}
+
+.sigCanvas{
+    border: 1px solid black;
+}
+.rpv-core__inner-pages{
+    overflow-y: hidden !important;
+}
+
+.homemade-apple-regular {
+    font-family: "Homemade Apple", cursive;
+    font-weight: 400;
+    font-style: normal;
+  }
+  .allura-regular {
+    font-family: "Allura", cursive;
+    font-weight: 400;
+    font-style: normal;
+  }
+  .satisfy-regular {
+    font-family: "Satisfy", cursive;
+    font-weight: 400;
+    font-style: normal;
+  }
+  .great-vibes-regular {
+    font-family: "Great Vibes", cursive;
+    font-weight: 400;
+    font-style: normal;
+  }
+  .handlee-regular {
+    font-family: "Handlee", cursive;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+
+.dancing-script {
+  font-family: "Dancing Script", cursive;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+.file-picker{
+  height: 200px;
+  width: 300px !important;
+  /* width: 300px; */
+  /* height: 100px; */
+  /* padding: 100px 200px ; */
+}
+
+.file-picker > label{
+  background-color: #fafafa;
+  border: 2px dashed #000;
+  padding: 50px 100px;
+  /* width: 300px !important; */
+}
+
+input[type='file']{
+  display: none;
+}
+
+.text-center{
+  text-align: right;
+}
