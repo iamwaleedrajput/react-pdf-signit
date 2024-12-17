@@ -7,7 +7,7 @@ const styles = {
   cursor: "move",
 };
 export const Box = memo(function Box({
-  title,
+  image,
   yellow,
   preview,
   height,
@@ -26,7 +26,7 @@ export const Box = memo(function Box({
       <ResizableImage
         initialHeight={height}
         initialWidth={width}
-        title={title}
+        image={image}
         id={id}
         boxes={boxes}
         setBoxes={setBoxes}

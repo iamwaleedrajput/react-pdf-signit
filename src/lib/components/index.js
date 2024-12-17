@@ -26,31 +26,33 @@ pdfjs.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@2.16.105/bui
 export default function ReactPDFSignIn({ fileUrl, loading, setLoading }) {
   const [signatureImage, setSignatureImage] = useState("");
   const [dragAndDrop, setDragAndDrop] = useState(false);
+  const [dimension, setDimension] = useState("");
   const [boxes, setBoxes] = useState([
-    // { width: 150, height: 100, top: 20, left: 80, title: signatureImage },
-    // { width: 300, height: 200, top: 20, left: 80, title: signatureImage },
+    // { width: 150, height: 100, top: 20, left: 80, image: signatureImage },
+    // { width: 300, height: 200, top: 20, left: 80, image: signatureImage },
   ]);
 
   const addAnother = () => {
     let newBoxes = boxes;
     const fId = newBoxes.at(-1).fId + 1;
-
+    const top = newBoxes.at(-1).top;
+    const left = newBoxes.at(-1).left;
     setBoxes([
       ...boxes,
       {
         fId,
         width: 150,
         height: 100,
-        top: 20,
-        left: 80,
-        title: signatureImage,
+        top: top,
+        left: left,
+        image: signatureImage,
       },
     ]);
   };
   useEffect(() => {
     if (signatureImage) {
       if (boxes.length) {
-        setBoxes(boxes.map((i) => ({ ...i, title: signatureImage })));
+        setBoxes(boxes.map((i) => ({ ...i, image: signatureImage })));
       } else {
         setBoxes([
           {
@@ -59,7 +61,7 @@ export default function ReactPDFSignIn({ fileUrl, loading, setLoading }) {
             height: 100,
             top: 20,
             left: 20,
-            title: signatureImage,
+            image: signatureImage,
           },
         ]);
       }
@@ -100,8 +102,9 @@ export default function ReactPDFSignIn({ fileUrl, loading, setLoading }) {
               )}
             </List>
           </div>
-          <div item className="pdf-col-7">
+          <div item className="pdf-col-7" style={{ width: dimension.width }}>
             <PDFViewer
+              setDimension={setDimension}
               fileUrl={fileUrl}
               signatureImage={signatureImage}
               dragAndDrop={dragAndDrop}

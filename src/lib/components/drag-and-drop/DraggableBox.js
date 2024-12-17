@@ -17,7 +17,7 @@ function getStyles(left, top, isDragging) {
   };
 }
 export const DraggableBox = memo(function DraggableBox(props) {
-  const { fId, id, title, left, top, height, width, boxes, setBoxes } = props;
+  const { fId, id, image, left, top, height, width, boxes, setBoxes } = props;
 
   let newTop = top;
   if (top < 0) {
@@ -26,12 +26,12 @@ export const DraggableBox = memo(function DraggableBox(props) {
   const [{ isDragging }, drag, preview] = useDrag(
     () => ({
       type: ItemTypes.BOX,
-      item: { id, left, top: newTop, title },
+      item: { id, left, top: newTop, image },
       collect: (monitor) => ({
         isDragging: monitor.isDragging(),
       }),
     }),
-    [id, left, top, title]
+    [id, left, top, image]
   );
   useEffect(() => {
     preview(getEmptyImage(), { captureDraggingState: true });
@@ -43,7 +43,7 @@ export const DraggableBox = memo(function DraggableBox(props) {
       role="DraggableBox"
     >
       <Box
-        title={title}
+        image={image}
         height={height}
         width={width}
         id={id}

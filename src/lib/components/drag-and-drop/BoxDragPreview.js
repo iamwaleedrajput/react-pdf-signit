@@ -11,7 +11,7 @@ const styles = {
   // transform: "rotate(-7deg)",
   // WebkitTransform: "rotate(-7deg)",
 };
-export const BoxDragPreview = memo(function BoxDragPreview({ title }) {
+export const BoxDragPreview = memo(function BoxDragPreview({ image }) {
   const [tickTock, setTickTock] = useState(false);
   useEffect(
     function subscribeToIntervalTick() {
@@ -22,7 +22,7 @@ export const BoxDragPreview = memo(function BoxDragPreview({ title }) {
   );
   return (
     <div style={styles}>
-      <Box title={title} yellow={tickTock} preview />
+      <Box image={image} yellow={tickTock} preview />
     </div>
   );
 });

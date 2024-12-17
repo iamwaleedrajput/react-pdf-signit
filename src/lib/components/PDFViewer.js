@@ -21,6 +21,7 @@ export default function PDFViewer({
   dragAndDrop,
   boxes,
   setBoxes,
+  setDimension,
 }) {
   const zoomPluginInstance = zoomPlugin();
   const { zoomTo } = zoomPluginInstance;
@@ -28,7 +29,7 @@ export default function PDFViewer({
     zoomTo(2); // Set custom scale factor to 1.5x zoom
   }, [zoomTo]);
   const [pdfBlobs, setPdfBlobs] = useState([]);
-  const [dimension, setDimension] = useState("");
+
   const [dataBlobs, setDataBlobs] = useState([]);
   //   console.log("box", boxes);
   const [pdfUrl, setPdfUrl] = useState("");

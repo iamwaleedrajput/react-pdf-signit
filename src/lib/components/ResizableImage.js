@@ -4,7 +4,7 @@ import React, { useState, useRef, useEffect } from "react";
 const ResizableImage = ({
   initialWidth,
   initialHeight,
-  title,
+  image,
   id,
   fId,
   boxes,
@@ -95,7 +95,7 @@ const ResizableImage = ({
         <Close fontSize="10px" />
       </div>
       <img
-        src={title} // Replace with your image source
+        src={image} // Replace with your image source
         alt="Resizable"
         style={{
           width: "100%",

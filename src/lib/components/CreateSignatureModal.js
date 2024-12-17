@@ -240,78 +240,80 @@ export default function CreateSignatureModal({
             />
 
             {(values.name || values.initial) && (
-              <Fragment>
-                {[
-                  {
-                    font: `homemade-apple-regular`,
-                    divRef: divRef1,
-                    initialRef: divRef7,
-                  },
-                  {
-                    font: `allura-regular`,
-                    divRef: divRef2,
-                    initialRef: divRef8,
-                  },
-                  {
-                    font: "satisfy-regular",
-                    divRef: divRef3,
-                    initialRef: divRef9,
-                  },
-                  {
-                    font: `great-vibes-regular`,
-                    divRef: divRef4,
-                    initialRef: divRef10,
-                  },
-                  {
-                    font: "handlee-regular",
-                    divRef: divRef5,
-                    initialRef: divRef11,
-                  },
-                  {
-                    font: `dancing-script`,
-                    divRef: divRef6,
-                    initialRef: divRef12,
-                  },
-                ].map((item, index) => (
-                  <Grid2
-                    key={index}
-                    container
-                    columnSpacing={2}
-                    sx={{ background: index % 2 ? "#fafafa" : "#fff" }}
-                  >
-                    <Grid2 xl={8}>
-                      <div style={{ display: "flex", alignItems: "center" }}>
-                        <Radio
-                          checked={selected === item.divRef}
-                          onChange={() => setSelected(item.divRef)}
-                        />
-                        <h1
-                          className={item.font}
-                          style={{ padding: "10px 15px", margin: 0 }}
-                          ref={item.divRef}
-                        >
-                          {values.name}
-                        </h1>
-                      </div>
-                    </Grid2>
-                    <Grid2 item xl={4}>
-                      <div style={{ display: "flex", alignItems: "center" }}>
-                        <Radio
-                          checked={selected === item.initialRef}
-                          onChange={() => setSelected(item.initialRef)}
-                        />
-                        <h1
-                          className={item.font}
-                          style={{ padding: "10px 15px", margin: 0 }}
-                          ref={item.initialRef}
-                        >
-                          {values.inital}
-                        </h1>
-                      </div>
-                    </Grid2>
-                  </Grid2>
-                ))}
-              </Fragment>
+              <table style={{ width: "100%" }}>
+                <tbody>
+                  {[
+                    {
+                      font: `homemade-apple-regular`,
+                      divRef: divRef1,
+                      initialRef: divRef7,
+                    },
+                    {
+                      font: `allura-regular`,
+                      divRef: divRef2,
+                      initialRef: divRef8,
+                    },
+                    {
+                      font: "satisfy-regular",
+                      divRef: divRef3,
+                      initialRef: divRef9,
+                    },
+                    {
+                      font: `great-vibes-regular`,
+                      divRef: divRef4,
+                      initialRef: divRef10,
+                    },
+                    {
+                      font: "handlee-regular",
+                      divRef: divRef5,
+                      initialRef: divRef11,
+                    },
+                    {
+                      font: `dancing-script`,
+                      divRef: divRef6,
+                      initialRef: divRef12,
+                    },
+                  ].map((item, index) => (
+                    <tr
+                      key={index}
+                      container
+                      columnSpacing={2}
+                      style={{ background: index % 2 ? "#fafafa" : "#fff" }}
+                    >
+                      <td>
+                        <div className="d-flex align-items-center">
+                          <Radio
+                            checked={selected === item.divRef}
+                            onChange={() => setSelected(item.divRef)}
+                          />
+                          <h2
+                            className={item.font}
+                            style={{ padding: "10px 15px", margin: 0 }}
+                            ref={item.divRef}
+                          >
+                            {values.name}
+                          </h2>
+                        </div>
+                      </td>
+                      <td>
+                        <div className="d-flex align-items-center">
+                          <Radio
+                            checked={selected === item.initialRef}
+                            onChange={() => setSelected(item.initialRef)}
+                          />
+                          <h2
+                            className={item.font}
+                            style={{ padding: "10px 15px", margin: 0 }}
+                            ref={item.initialRef}
+                          >
+                            {values.inital}
+                          </h2>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             )}
             <div style={{ textAlign: "right" }}>
               {/* <Button onClick={() => sigCanvas.current.clear()}>Clear</Button> */}

@@ -15,8 +15,8 @@ export default function SubmitSignature({
   fileUrl,
   loading,
   setLoading,
+  handleSubmit,
 }) {
-  console.log("moved, boxes", boxes);
   const createSignatureImage = async (allPages) => {
     try {
       const sign_container = document.getElementById("sign_container");
@@ -47,14 +47,14 @@ export default function SubmitSignature({
         elem.id = "my-div";
         elem.style.height = `${height}px`;
         elem.style.width = `${width}px`;
-        elem.style.background = "rgba(0,255,0,0.2)";
-        // elem.style.background = `transparent`;
+        elem.style.background = `transparent`;
         elem.style.position = "relative";
-        console.log("filteredBoxes boxes", filteredBoxes);
+
+        // ** adding image to div/element
         for (let j of filteredBoxes) {
           const top = j.top - fromHeigth;
           const img = document.createElement("img");
-          img.src = j["title"]; // Replace with your image URL
+          img.src = j["image"]; // Replace with your image URL
           img.alt = "Custom Image";
           img.style.width = j["width"] + "px";
           img.style.height = j["height"] + "px";
@@ -62,10 +62,13 @@ export default function SubmitSignature({
           img.style.zIndex = "99";
           img.style.top = top + "px";
           img.style.left = j["left"] - ratioWidth + "px";
-          img.style.objectFit = "cover";
-          img.style.background = "rgba(255,0,0,0.2)";
+          img.style.objectFit = "contain";
+          // img.style.background = "rgba(255,0,0,0.2)";
+          img.style.background = "transparent";
           elem.appendChild(img);
         }
+
+        // ** appending into body to get by ID
         document.body.appendChild(elem);
         const divElement = document.getElementById("my-div");
         const canvas = await html2canvas(divElement, {
@@ -74,7 +77,9 @@ export default function SubmitSignature({
           width,
         });
         const dataURL = canvas.toDataURL();
+        // ** pushing into array
         arr.push(dataURL);
+        // ** removing from body as per no need
         document.body.removeChild(divElement);
       }
       return arr;
@@ -86,8 +91,8 @@ export default function SubmitSignature({
   const createSignedPDF = async () => {
     setLoading && setLoading(true);
     const pdfBytes = await fetch(fileUrl).then((res) => res.arrayBuffer());
-    // Convert the canvas to a Data URI
-    // Load the PDF document
+
+    // ** Load the PDF document
     const pdfDoc = await PDFDocument.load(pdfBytes);
     // Embed the signature image into the PDF document
     // const signatureImage = await pdfDoc.embedPng(signatureBytes); // or embedJpg if it's a JPG
@@ -115,8 +120,11 @@ export default function SubmitSignature({
         const file = new File([blob], `signed_agreement.pdf`, {
           type: blob.type,
         });
+        handleSubmit(file);
+      })
+      .catch(() => {
+        setLoading && setLoading(true);
       });
-    window.open(link);
   };
   return (
     <Fragment>

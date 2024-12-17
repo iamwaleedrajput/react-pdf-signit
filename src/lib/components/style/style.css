@@ -5,7 +5,6 @@
 }
 
 .css-rizt0-MuiTypography-root {
-  /* font-size: 14px !important; */
   white-space: nowrap;
   color: rgba(0, 0, 0, 0.54) !important;
 }
@@ -56,16 +55,12 @@ body {
 .file-picker {
   height: 200px;
   width: 300px !important;
-  /* width: 300px; */
-  /* height: 100px; */
-  /* padding: 100px 200px ; */
 }
 
 .file-picker > label {
   background-color: #fafafa;
   border: 2px dashed #000;
   padding: 50px 100px;
-  /* width: 300px !important; */
 }
 
 input[type="file"] {
@@ -87,8 +82,7 @@ input[type="file"] {
 }
 
 .pdf-col-7 {
-  /* width: 58.3333333333%; */
-  width: 612px;
+  width: 58.3333333333%;
 }
 .pdf-col-3 {
   width: 25%;
@@ -103,27 +97,17 @@ input[type="file"] {
   }
 }
 
-/* .rpv-core__text-layer {
-  height: 100% !important;
-}
-
-.rpv-core__canvas-layer {
-  height: 100% !important;
-}
-.rpv-core__canvas-layer,
-.rpv-core__inner-page {
-  height: 100% !important;
-} */
-
-/* .rpv-core__page-layer::after {
-  left: 0 !important;
-  right: 0 !important;
-  top: 0 !important;
-  bottom: 0 !important;
-  box-shadow: none !important;
-  border-bottom: 1px solid gray;
-} */
-
 .rpv-core__inner-page {
   background-color: transparent !important;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+.d-flex {
+  display: flex;
+}
+.align-items-center {
+  align-items: center;
 }
