@@ -1,4 +1,4 @@
-import { UploadFile } from "@mui/icons-material";
+import { CalendarToday, UploadFile } from "@mui/icons-material";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import CloseIcon from "@mui/icons-material/Close";
@@ -184,9 +184,9 @@ export default function AddDateModal({
       <ListItem>
         <ListItemButton onClick={handleConvertToDataUri}>
           <ListItemIcon>
-            <BorderColorIcon />
+            <CalendarToday />
           </ListItemIcon>
-          <ListItemText primary="Add Signature" />
+          <ListItemText primary="Add Date" />
         </ListItemButton>
       </ListItem>
 

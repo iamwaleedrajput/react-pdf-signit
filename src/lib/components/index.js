@@ -115,12 +115,12 @@ export default function ReactPDFSignIn({
               ) : (
                 ""
               )}
-              <AddDateModal
+              {/* <AddDateModal
                 setDragAndDrop={setDragAndDrop}
                 setSignatureImage={setSignatureImage}
                 boxes={boxes}
                 setBoxes={setBoxes}
-              />
+              /> */}
               {boxes.length ? (
                 <SubmitSignature
                   fileUrl={fileUrl}
@@ -134,7 +134,7 @@ export default function ReactPDFSignIn({
               )}
             </List>
           </div>
-          <div item className="pdf-col-7" style={{ width: dimension.width }}>
+          <div item className="pdf-col-7">
             <PDFViewer
               setDimension={setDimension}
               fileUrl={fileUrl}
