@@ -20,11 +20,11 @@ export default function SubmitSignature({
   const createSignatureImage = async (allPages) => {
     try {
       const sign_container = document.getElementById("sign_container");
-      console.log("sign_container", sign_container.offsetWidth);
+      // console.log("sign_container", sign_container.offsetWidth);
       const { height, width } = allPages[0].getSize();
       const newWidth = sign_container.offsetWidth - width;
       const ratioWidth = newWidth / 2;
-      console.log("newWidth", newWidth);
+      // console.log("newWidth", newWidth);
       let arr = [];
 
       for (let i in allPages) {
@@ -62,7 +62,7 @@ export default function SubmitSignature({
           img.style.zIndex = "99";
           img.style.top = top + "px";
           img.style.left = j["left"] - ratioWidth + "px";
-          img.style.objectFit = "contain";
+          img.style.objectFit = "cover";
           // img.style.background = "rgba(255,0,0,0.2)";
           img.style.background = "transparent";
           elem.appendChild(img);
@@ -116,11 +116,12 @@ export default function SubmitSignature({
     const link = URL.createObjectURL(blob);
     fetch(link)
       .then((response) => response.blob())
-      .then((blob) => {
-        const file = new File([blob], `signed_agreement.pdf`, {
+      .then((nblob) => {
+        const file = new File([nblob], `signed_agreement.pdf`, {
           type: blob.type,
         });
         handleSubmit(file);
+        // window.open(link);
       })
       .catch(() => {
         setLoading && setLoading(true);

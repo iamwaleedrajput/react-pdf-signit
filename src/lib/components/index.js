@@ -19,11 +19,17 @@ import CreateSignatureModal from "./CreateSignatureModal";
 import "./style/style.css";
 import SubmitSignature from "./SubmitSignature";
 import { AddCircleOutline } from "@mui/icons-material";
+import AddDateModal from "./AddDateModal";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@2.16.105/build/pdf.worker.min.js`;
 // 3.11.174" does not match the Worker version "3.4.120".', name: 'UnknownErrorException'}
 
-export default function ReactPDFSignIn({ fileUrl, loading, setLoading }) {
+export default function ReactPDFSignIn({
+  fileUrl,
+  loading,
+  setLoading,
+  handleSubmit,
+}) {
   const [signatureImage, setSignatureImage] = useState("");
   const [dragAndDrop, setDragAndDrop] = useState(false);
   const [dimension, setDimension] = useState("");
@@ -49,10 +55,29 @@ export default function ReactPDFSignIn({ fileUrl, loading, setLoading }) {
       },
     ]);
   };
+  // console.log("bo", boxes);
   useEffect(() => {
     if (signatureImage) {
       if (boxes.length) {
-        setBoxes(boxes.map((i) => ({ ...i, image: signatureImage })));
+        const datesBoxes = boxes.filter((i) => i.type === "date");
+        const lastElement = boxes.at(-1);
+        let signBoxes = boxes
+          .filter((i) => i.type !== "date")
+          .map((i) => ({ ...i, image: signatureImage }));
+        if (!signBoxes.length) {
+          signBoxes = [
+            ...signBoxes,
+            {
+              fId: lastElement ? lastElement.fId + 1 : Date.now(),
+              image: signatureImage,
+              width: 120,
+              height: 40,
+              left: lastElement ? lastElement.left : 20,
+              top: lastElement ? lastElement.top : 20,
+            },
+          ];
+        }
+        setBoxes([...datesBoxes, ...signBoxes]);
       } else {
         setBoxes([
           {
@@ -78,7 +103,7 @@ export default function ReactPDFSignIn({ fileUrl, loading, setLoading }) {
                 setDragAndDrop={setDragAndDrop}
                 setSignatureImage={setSignatureImage}
               />
-              {boxes.length ? (
+              {boxes.length && signatureImage ? (
                 <ListItem>
                   <ListItemButton onClick={() => addAnother()}>
                     <ListItemIcon>
@@ -90,12 +115,19 @@ export default function ReactPDFSignIn({ fileUrl, loading, setLoading }) {
               ) : (
                 ""
               )}
+              <AddDateModal
+                setDragAndDrop={setDragAndDrop}
+                setSignatureImage={setSignatureImage}
+                boxes={boxes}
+                setBoxes={setBoxes}
+              />
               {boxes.length ? (
                 <SubmitSignature
                   fileUrl={fileUrl}
                   boxes={boxes}
                   loading={loading}
                   setLoading={setLoading}
+                  handleSubmit={handleSubmit}
                 />
               ) : (
                 ""

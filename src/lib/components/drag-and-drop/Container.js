@@ -56,7 +56,7 @@ export const Container = ({
           zIndex: 2,
           width: "100%",
           background: "red",
-          display: signatureImage ? "" : "none",
+          display: boxes.length ? "" : "none",
         }}
         id="sign_container"
       >

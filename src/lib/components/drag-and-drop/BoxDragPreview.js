@@ -3,15 +3,17 @@ import { memo, useEffect, useState } from "react";
 import { Box } from "./Box";
 // import { width } from "@mui/system";
 // import { height } from "@mui/system";
-const styles = {
-  // display: "block",
-  height: 200,
-  width: 300,
-  // objectFit: "cover",
-  // transform: "rotate(-7deg)",
-  // WebkitTransform: "rotate(-7deg)",
-};
-export const BoxDragPreview = memo(function BoxDragPreview({ image }) {
+export const BoxDragPreview = memo(function BoxDragPreview({
+  image,
+  item,
+  boxes,
+}) {
+  const styles = {
+    display: "inline-block",
+    width: boxes[item.id]["width"],
+    height: boxes[item.id]["height"],
+  };
+  // console.log(" boxes[item.id]", styles);
   const [tickTock, setTickTock] = useState(false);
   useEffect(
     function subscribeToIntervalTick() {
@@ -21,7 +23,11 @@ export const BoxDragPreview = memo(function BoxDragPreview({ image }) {
     [tickTock]
   );
   return (
-    <div style={styles}>
+    <div
+      style={{
+        ...styles,
+      }}
+    >
       <Box image={image} yellow={tickTock} preview />
     </div>
   );

@@ -135,7 +135,7 @@ export default function CreateSignatureModal({
         // Convert the canvas to a Data URI
         const dataUri = canvas.toDataURL("image/png");
 
-        console.log("Data URI:", dataUri);
+        // console.log("Data URI:", dataUri);
         setSignatureImage(dataUri);
         setOpen(false);
         setDragAndDrop(true);
@@ -150,7 +150,7 @@ export default function CreateSignatureModal({
   };
   const handleSave = async () => {
     const dataURL = sigCanvas.current.toDataURL(); // Get the base64 image of the drawn area
-    console.log(dataURL); // This is the image data in base64 format
+    // console.log(dataURL); // This is the image data in base64 format
     // You can now use this base64 string (e.g., display or save it)
     setSignatureImage(dataURL);
     setOpen(false);

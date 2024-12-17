@@ -41,10 +41,13 @@ export const CustomDragLayer = (props) => {
       currentOffset: monitor.getSourceClientOffset(),
       isDragging: monitor.isDragging(),
     }));
+
   function renderItem() {
     switch (itemType) {
       case ItemTypes.BOX:
-        return <BoxDragPreview image={item.image} />;
+        return (
+          <BoxDragPreview image={item.image} item={item} boxes={props.boxes} />
+        );
       default:
         return null;
     }
